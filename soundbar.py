@@ -4,6 +4,7 @@
 # soundbar.py
 # 
 # tool for detecting all sound devices and displaying them on the i3status bar.
+# made to work with ttf-symbola
 
 import sys
 import json
@@ -51,6 +52,7 @@ def create_device_status(d):
 		volume = d.split('\tVolume:')[1].split('/',1)[1].split('/',1)[0].strip()
 	else:
 		volume = 'muted'
+		icon = muted_icon
 	
 	state = d.split('\tState:')[1].split('\n',1)[0]
 	
