@@ -37,7 +37,7 @@ def parse_devices(devices):
 def create_device_status(d):
 	icon = ''
 	
-	name = d.split('\tName: alsa_output.')[1].split('\n',1)[0]
+	name = d.split('Name:')[1].split('\n',1)[0]
 	
 	if 'usb' in name:
 		icon = usb_icon
@@ -58,6 +58,11 @@ def create_device_status(d):
 	
 	if 'RUNNING' in state:
 		icon = icon + '*'
+		
+	icon_name = d.split('device.icon_name = "')[1].split('"',1)[0]
+	
+	if icon_name == "audio-headset-bluetooth":
+		icon = usb_icon
 	
 	return icon + ':' + volume
 
@@ -99,6 +104,7 @@ if __name__ == '__main__':
 		
 		# read sound device info 
 		devices = get_devices()
+		#print(devices)
 		soundbar = parse_devices(devices)
 		
 		# insert information into the start of the json, but could be anywhere
